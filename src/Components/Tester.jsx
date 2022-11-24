@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import db from '../db.json'
 import { useParams } from 'react-router-dom';
-import { Player } from 'video-react';
 import Tarea from './Tarea';
+import Video from './Video';
 
 const Tester = () => {
     const params = useParams()
@@ -14,18 +14,26 @@ const Tester = () => {
       setItem(route)
     }, [params])
     
+    let sentences = item.transcripcion?.split('<br>')
+    
   return (
-    <div>
+    <>
         <h1>{item.cliente}</h1>
-        <h1>Test: Test de usabilidad en el sitio web</h1>
-        <h2>Testeador {index+1}</h2>
-        <Player fluid={false} width={1300} height={1100} src={item.linkVideo} playsInline={false}/>
-        <p id='text'>{item.transcripcion}</p>
-        <h2>Tareas</h2>
-        <h3>Escenario: {item.escenario}</h3>
+        <h2>Test: Test de usabilidad en el sitio web</h2>
+        <h3>Testeador {index+1}</h3>
+
+        <Video linkVideo={item.linkVideo}/>
+
+        <h3>Transcripción</h3>
+        <div className='transcripcion'>
+          {sentences?.map(sentence => <p key={sentence}>{sentence}</p> )}
+        </div>
+
+        <h3>Tareas</h3>
+        <h4>Escenario: {item.escenario}</h4>
         <hr/>
-        {item.preguntas?.map(( item, index) => <Tarea key={item.texto} item={item} index={index}/>)}
-    </div>
+        {item.preguntas?.map(( item, index) => <Tarea key={item.texto} item={item} index={index}/>)} 
+    </>
   )
 }
 

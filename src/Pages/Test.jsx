@@ -1,15 +1,11 @@
-import React from 'react'
-import { Link, Outlet } from 'react-router-dom'
-import simulacr from '../assets/logo-simulacr.png'
-
+import { Outlet } from 'react-router-dom'
+import Header from '../Components/Header'
 
 const Test = () => {
   return (
     <div>
-        <img src={simulacr} alt="" />
-        <Link to='/test/viamo'><h3>Viamo Testing</h3></Link>
-        <Link to='/test/nebula'><h3>Nebula Testing</h3></Link>
-        <Outlet/>
+      <Header/>
+      <Outlet/>
     </div>
   )
 }
